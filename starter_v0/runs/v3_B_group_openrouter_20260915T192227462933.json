@@ -1,35 +1,31 @@
 {
-  "run_id": "v3_B_group_openrouter_20260915T185104511939",
+  "run_id": "v3_B_group_openrouter_20260915T192227462933",
   "version": "v3",
-  "artifact_version": "v3+p9a56ac36893b+t52b9e7efecc6",
-  "prompt_hash": "9a56ac36893b2e49e6c38ad60601440ef2654f2ee97ad448425731ce1b6026a7",
+  "artifact_version": "v3+p26512185f2a4+t52b9e7efecc6",
+  "prompt_hash": "26512185f2a4f48413f901c4bbdb5cedc62eaa095ba860d8af2a84ed25155087",
   "tools_hash": "52b9e7efecc60b01ece3dc19b5588ff06dab972aa39541fad0256be2bb775588",
   "phase": "B",
   "suite": "group",
   "provider": "openrouter",
   "model": "openai/gpt-4o-mini",
-  "system_prompt": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\artifacts\\system_prompt.md",
-  "tools": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\artifacts\\tools.yaml",
-  "eval_cases": "data\\eval_group.json",
+  "system_prompt": "/home/hoang/AI_VinUni/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling/starter_v0/artifacts/system_prompt.md",
+  "tools": "/home/hoang/AI_VinUni/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
   "dataset_id": "day04_v3_helpdesk_group",
   "dataset_role": "group",
   "description": "Team NhomGG custom test suite: 5 single-turn queries and 5 multi-turn conversations testing helpdesk capabilities and the bonus diagnose_network tool.",
-  "generated_at": "2026-09-15T18:51:04",
+  "generated_at": "2026-09-15T19:22:27",
   "summary": {
     "total_cases": 10,
     "measured_cases": 10,
     "provider_error_cases": 0,
-    "passed_cases": 9,
-    "case_accuracy": 0.9,
-    "tool_routing_accuracy": 0.9,
-    "argument_accuracy": 0.9,
-    "multiturn_accuracy": 0.8,
-    "failure_counts": {
-      "wrong_boundary": 1
-    },
-    "observed_mismatch_counts": {
-      "unexpected_tool_call": 1
-    }
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
   },
   "results": [
     {
@@ -90,7 +86,7 @@
             "packet_loss_pct": 0,
             "status": "healthy",
             "summary": "Ping to vpn (10.10.1.1) successful: 0% loss, latency 25ms",
-            "tested_at": "2026-09-15T18:50:53"
+            "tested_at": "2026-09-15T19:22:14"
           }
         }
       ]
@@ -151,7 +147,7 @@
             "resolved_ip": "10.10.3.10",
             "status": "resolved",
             "dns_server": "10.10.0.2",
-            "tested_at": "2026-09-15T18:50:54"
+            "tested_at": "2026-09-15T19:22:15"
           }
         }
       ]
@@ -212,7 +208,7 @@
             "target_ip": "10.10.2.25",
             "port": 587,
             "port_status": "open",
-            "tested_at": "2026-09-15T18:50:55"
+            "tested_at": "2026-09-15T19:22:16"
           }
         }
       ]
@@ -320,7 +316,7 @@
             "packet_loss_pct": 0,
             "status": "healthy",
             "summary": "Ping to gateway (10.10.0.1) successful: 0% loss, latency 2ms",
-            "tested_at": "2026-09-15T18:50:56"
+            "tested_at": "2026-09-15T19:22:19"
           }
         }
       ]
@@ -346,7 +342,7 @@
         "routing_correct": true,
         "args_correct": true,
         "actual_tool_calls": [],
-        "actual_text": "Tôi chỉ có thể hỗ trợ bạn với các vấn đề liên quan đến IT và dịch vụ hỗ trợ kỹ thuật. Nếu bạn cần giúp đỡ về ticket, tài sản, hoặc chính sách công ty, hãy cho tôi biết!",
+        "actual_text": "Tôi chỉ có thể hỗ trợ bạn với các vấn đề liên quan đến IT, như kiểm tra vé hỗ trợ, tài sản, bài viết kiến thức và chính sách công ty. Nếu bạn cần thông tin về các vấn đề này, hãy cho tôi biết!",
         "case_failure_type": "out_of_scope",
         "observed_mismatch": null,
         "failure_type": null,
@@ -425,7 +421,7 @@
             "packet_loss_pct": 0,
             "status": "healthy",
             "summary": "Ping to email (10.10.2.25) successful: 0% loss, latency 15ms",
-            "tested_at": "2026-09-15T18:50:59"
+            "tested_at": "2026-09-15T19:22:22"
           }
         }
       ]
@@ -499,7 +495,7 @@
             "target_ip": "10.10.3.10",
             "port": 443,
             "port_status": "open",
-            "tested_at": "2026-09-15T18:51:00"
+            "tested_at": "2026-09-15T19:22:23"
           }
         }
       ]
@@ -574,8 +570,8 @@
           "result": {
             "tool": "create_ticket",
             "status": "created",
-            "ticket_id": "LAB-9EAE43E8",
-            "path": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\tickets\\LAB-9EAE43E8.json"
+            "ticket_id": "LAB-B7DDAD54",
+            "path": "/home/hoang/AI_VinUni/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling/starter_v0/tickets/LAB-B7DDAD54.json"
           }
         }
       ]
@@ -691,42 +687,17 @@
         "behavior": "cancel"
       },
       "result": {
-        "passed": false,
-        "routing_correct": false,
-        "args_correct": false,
-        "actual_tool_calls": [
-          {
-            "name": "clarify",
-            "args": {
-              "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
-              "response_type": "yes_no"
-            }
-          }
-        ],
-        "actual_text": null,
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "{\"intent\":\"ticket_creation\",\"action\":\"cancel\",\"reply\":\"Hành động tạo ticket đã được hủy. Nếu bạn cần hỗ trợ gì khác, hãy cho tôi biết!\",\"evidence_ids\":[]}",
         "case_failure_type": "wrong_boundary",
-        "observed_mismatch": "unexpected_tool_call",
-        "failure_type": "wrong_boundary",
-        "failures": [
-          "expected no tool call"
-        ]
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
       },
-      "tool_results": [
-        {
-          "tool": "clarify",
-          "args": {
-            "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
-            "response_type": "yes_no"
-          },
-          "result": {
-            "tool": "clarify",
-            "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
-            "response_type": "yes_no",
-            "options": [],
-            "awaiting_user": true
-          }
-        }
-      ]
+      "tool_results": []
     }
   ]
 }
