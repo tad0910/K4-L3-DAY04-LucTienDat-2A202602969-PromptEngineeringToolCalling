@@ -49,13 +49,13 @@
 ### Nguyễn Văn Đại — 2A202602477 (Vai C — Giao diện và hội thoại)
 
 - **Phần việc và file/commit/PR:**
-  - Chịu trách nhiệm Vai C: Xây dựng ứng dụng Web Chat UI hoàn chỉnh tại `starter_v0/ui_app.py`.
+  - Chịu trách nhiệm Vai C: Xây dựng ứng dụng Web Chat UI hoàn chỉnh tại `starter_v0/app.py` (hoạt động ở port 8501).
   - Thiết kế giao diện Dark Mode cao cấp (Glassmorphism), hiển thị trực quan và tách biệt các khối Tool Call, Input parameters, Tool Results / Execution Error.
   - Tích hợp bộ chọn phiên bản Agent (v0/v1/v2/v3), gợi ý nhanh (Quick Prompts) và tính năng tải file Transcript JSON một chạm (`/api/transcript`).
-  - Thực hiện các phiên chat live đa lượt để kiểm thử và lưu trữ transcript mẫu.
+  - Thực hiện các phiên chat live đa lượt để kiểm thử và lưu trữ transcript mẫu kèm ảnh chụp màn hình minh chứng `ui_screenshot.png`.
 - **Quyết định, khó khăn và cách xử lý:**
   - *Khó khăn:* Cần giao diện trực quan, nhẹ nhàng, hiển thị minh bạch toàn bộ các bước gọi tool nội bộ mà không cần cài đặt thêm dependency nặng.
-  - *Cách xử lý:* Xây dựng ứng dụng web độc lập bằng Python HTTP Server kết hợp HTML5/CSS3/JavaScript hiện đại, mở cổng 8080 để demo trực tiếp mượt mà.
+  - *Cách xử lý:* Xây dựng ứng dụng web độc lập bằng Python HTTP Server kết hợp HTML5/CSS3/JavaScript hiện đại, mở cổng 8501 để demo trực tiếp mượt mà.
 - **Điều đã học:** Cách thiết kế trải nghiệm người dùng cho hệ thống AI Agent (Agentic UX), trực quan hóa dữ liệu JSON đầu vào/đầu ra của công cụ một cách thân thiện.
 - **AI/công cụ đã dùng và cách kiểm tra:** Google Chrome DevTools, Antigravity IDE, kiểm thử giao diện qua các kịch bản chat thực tế.
 - **Thời điểm đã tự nộp URL repo chung trên VLearn:** Trước deadline 23:59.

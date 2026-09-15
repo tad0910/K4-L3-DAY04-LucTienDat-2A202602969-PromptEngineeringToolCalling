@@ -23,7 +23,10 @@
 
 Trợ lý IT Helpdesk có khả năng tiếp nhận yêu cầu hỗ trợ kỹ thuật, tự động định tuyến và gọi đúng các công cụ kiểm tra dịch vụ, tra cứu thiết bị, hỏi làm rõ khi thiếu thông tin (`clarify`), yêu cầu xác nhận trước khi tạo ticket, và chẩn đoán kết nối mạng (`diagnose_network`). Agent tuân thủ ranh giới an toàn, từ chối các yêu cầu ngoài phạm vi và không làm rò rỉ dữ liệu nội bộ ra ngoài.
 
-**Link dùng thử:** Chạy local Web UI qua lệnh `python ui_app.py` và truy cập `http://127.0.0.1:8080`.
+**Link dùng thử:** Chạy local Web UI qua lệnh `python app.py` và truy cập `http://127.0.0.1:8501`.
+
+**Minh chứng Giao diện Web Chatbot thực tế (Port 8501):**
+![Giao diện Web Chatbot IT Helpdesk Agent v3 tại Port 8501](ui_screenshot.png)
 
 ## A2. Tool agent có
 
@@ -132,6 +135,12 @@ Trợ lý IT Helpdesk có khả năng tiếp nhận yêu cầu hỗ trợ kỹ t
 - **Fix thuộc `system_prompt.md`:** Thêm quy tắc thiếu thông tin (`missing_info`), ranh giới xác nhận vé (`wrong_boundary`), và hướng dẫn triage đa nguồn song song.
 - **Fix thuộc `tools.yaml`:** Bổ sung `response_type` vào `required` của `clarify`, khai báo công cụ mới `diagnose_network`.
 - **Nếu có thêm một vòng (v4):** Nhóm sẽ bổ sung cơ chế kiểm tra định dạng email/IP đầu vào chặt chẽ hơn và tích hợp thêm tính năng tạo đồ thị trễ mạng trên Web UI.
+
+### B7.1 Reflection cá nhân — Lục Tiến Đạt - 2A202602969
+
+- **Nhiệm vụ đảm nhận chính trong bài lab:** Đảm nhận Vai B + D (Dữ liệu & kiểm tra + Tích hợp & báo cáo). Trực tiếp phát triển Custom Bonus Tool `diagnose_network`, xây dựng bộ 10 test case nhóm (`eval_group.json`), thực thi toàn bộ pipeline benchmark tự động cho 4 phiên bản (`v0-v3`), bộ an toàn `adversarial` và bộ mở rộng `extension`. Quản trị tích hợp mã nguồn Git repo và hoàn thiện báo cáo `REPORT.md`.
+- **Kịch bản lỗi (failure mode) đã trực tiếp phân tích và giải quyết:** Phân tích lỗi Rate Limit API và các ca lỗi định tuyến khi kiểm tra đa nguồn (`H13_parallel_status_and_device`, `H17_triage_with_three_sources`). Trực tiếp giải quyết bài toán tích hợp công cụ mở rộng `diagnose_network` vào tool registry để hỗ trợ các bài test ping/DNS/port check mà không làm xung đột với các core tools có sẵn, đưa độ chính xác của bộ test nhóm lên 90% (9/10 PASS).
+- **Bài học rút ra về Prompt Engineering & Tool Calling:** Hiểu sâu sắc rằng chất lượng của một hệ thống AI Agent không chỉ nằm ở mô hình nền tảng (LLM) mà phụ thuộc mang tính quyết định vào cách thiết kế **Tool Schema (parameters, required fields, descriptions)** kết hợp chặt chẽ với **System Prompt định hướng ranh giới (Guardrails & Confirmation boundaries)**. Việc đánh giá phải dựa trên dữ liệu định lượng (Metrics & Traces) thay vì đánh giá cảm tính.
 
 ---
 
