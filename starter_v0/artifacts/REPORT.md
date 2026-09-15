@@ -69,7 +69,7 @@ Trợ lý IT Helpdesk có khả năng tiếp nhận yêu cầu hỗ trợ kỹ t
 | **v0** | Baseline nguyên bản chưa sửa | Baseline ban đầu sẽ gặp lỗi thiếu thông tin, tự tạo ticket và không gọi song song | case_accuracy | 0.0% | **70.0%** (21/30) | `runs/v0_B_base_openrouter_20260915T182852711202.json` |
 | **v1** | Thêm quy tắc xử lý thiếu thông tin (`missing_info`) vào `system_prompt.md` | Bổ sung chỉ dẫn gọi `clarify` khi thiếu `asset_id`/`employee_id` sẽ tăng độ chính xác định tuyến | tool_routing_accuracy | 76.67% | **83.33%** | `runs/v1_B_base_openrouter_20260915T183356923704.json` |
 | **v2** | Thêm ranh giới xác nhận vé (`wrong_boundary`) & `required: [question, response_type]` trong `tools.yaml` | Ràng buộc xác nhận trước khi ghi và chuẩn hóa tham số clarify sẽ đưa các case missing_info và confirmation sang PASS | case_accuracy | 70.0% | **80.0%** (24/30) | `runs/v2_B_base_openrouter_20260915T183639996003.json` |
-| **v3** | Thêm quy tắc Triage đa nguồn song song và ưu tiên ngữ cảnh đa lượt | Hướng dẫn gọi multi-tools song song và bám sát intent mới nhất sẽ nâng độ chính xác hội thoại đa lượt lên 90% | multiturn_accuracy | 80.0% | **90.0%** (9/10) | `runs/v3_B_base_openrouter_20260915T184348011059.json` |
+| **v3** | Thêm quy tắc Triage đa nguồn song song, KB category mapping, không trùng lặp lookup và hủy bỏ xác nhận khi sửa payload | Hướng dẫn gọi multi-tools song song, mapping category và kiểm soát chặt chẽ confirmation boundary đưa case_accuracy lên tuyệt đối | case_accuracy | 80.0% | **100.0%** (30/30) | `runs/v3_B_base_openrouter_20260915T205806333035.json` |
 
 ## B2. Failure analysis
 
