@@ -7,7 +7,7 @@
 - Tên nhóm: NhomGG 
 - Người đại diện / MSSV: Lục Tiến Đạt / 2A202602969
 - Tên repo: `K4-DAY04-NhomGG`
-- URL repo, nhánh nộp, commit chốt: https://github.com/tad0910/K4-DAY04-NhomGG , nhánh main
+- URL repo, nhánh nộp, commit chốt: https://github.com/tad0910/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling , nhánh main, commit `b67719d`
 - Deadline áp dụng: 23:59 ngày học (Asia/Ho_Chi_Minh)
 
 ## Thành viên
