@@ -10,9 +10,9 @@
 - **Tên nhóm:** NhomGG
 - **Thành viên và INDIVIDUAL:** [TEAM.md](../../TEAM.md)
 - **Members:**
-  - Trần Tuấn Hoàng — 2A202602832 (Prompt Engineering & Data Evaluation)
-  - Nguyễn Văn Đại — 2A202602477 (UI/UX Web Chat Application & Transcripts)
-  - Lục Tiến Đạt — 2A202602969 (Bonus Tool Development & Evaluation Benchmark)
+  - **Trần Tuấn Hoàng — 2A202602832:** Vai A — Hướng dẫn và công cụ (Prompt Engineering & Tool Declarations)
+  - **Nguyễn Văn Đại — 2A202602477:** Vai C — Giao diện và hội thoại (UI/UX Web Chat App & Transcripts)
+  - **Lục Tiến Đạt — 2A202602969:** Vai B + D — Dữ liệu & kiểm tra + Tích hợp & báo cáo (Data, Benchmarks & Integration/Reporting)
 - **Provider/model:** OpenRouter (`openai/gpt-4o-mini`)
 
 ---
