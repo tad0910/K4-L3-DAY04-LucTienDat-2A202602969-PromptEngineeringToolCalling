@@ -8,14 +8,14 @@
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Gửi một câu hỏi cho người dùng."
+    description: "Gửi một câu hỏi để làm rõ thông tin hoặc xin xác nhận từ người dùng trước các hành động quan trọng."
     parameters:
       type: object
       properties:
         question: {type: string, default: "", description: "Câu hỏi"}
         response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
         options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
-      required: [question]
+      required: [question, response_type]
 
   - name: search_kb
     description: "Tìm hướng dẫn hỗ trợ kỹ thuật."
@@ -105,3 +105,13 @@ tools:
         asset_id: {type: string, default: "", description: "Mã tài sản nếu có"}
         confirmed: {type: boolean, default: false, description: "Đã được người dùng xác nhận"}
       required: [summary]
+
+  # ---------------- Team Bonus Tool ----------------
+  - name: diagnose_network
+    description: "Chẩn đoán kết nối mạng, ping, DNS lookup hoặc kiểm tra cổng đến máy chủ và dịch vụ nội bộ."
+    parameters:
+      type: object
+      properties:
+        target: {type: string, enum: [vpn, email, sso, dns, gateway, internet], default: "vpn", description: "Dịch vụ hoặc đích mạng cần kiểm tra"}
+        test_type: {type: string, enum: [ping, traceroute, dns_lookup, port_check], default: "ping", description: "Loại kiểm tra chẩn đoán"}
+      required: [target, test_type]

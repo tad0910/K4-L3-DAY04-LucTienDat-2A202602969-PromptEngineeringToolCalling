@@ -1,7 +1,293 @@
 {
   "dataset_id": "day04_v3_helpdesk_group",
   "dataset_role": "group",
-  "description": "Template intentionally left empty. The team must write exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
+  "description": "Team NhomGG custom test suite: 5 single-turn queries and 5 multi-turn conversations testing helpdesk capabilities and the bonus diagnose_network tool.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_diagnose_ping_vpn",
+      "phase": "B",
+      "suite": "group",
+      "query": "Kiểm tra ping và độ trễ kết nối đến hệ thống VPN giúp mình.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "vpn",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "bonus_network_ping",
+        "difficulty": "easy",
+        "what_it_tests": "Kiểm tra khả năng định tuyến đúng vào tool mở rộng diagnose_network với test_type ping."
+      }
+    },
+    {
+      "id": "G02_diagnose_dns_lookup",
+      "phase": "B",
+      "suite": "group",
+      "query": "Thực hiện DNS lookup phân giải địa chỉ cho máy chủ SSO.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "dns_lookup"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "bonus_network_dns",
+        "difficulty": "medium",
+        "what_it_tests": "Trích xuất đúng target và test_type=dns_lookup cho tool chẩn đoán mạng."
+      }
+    },
+    {
+      "id": "G03_diagnose_email_port",
+      "phase": "B",
+      "suite": "group",
+      "query": "Kiểm tra cổng kết nối port của máy chủ email nội bộ.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "port_check"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "bonus_network_port",
+        "difficulty": "medium",
+        "what_it_tests": "Định tuyến sang test_type=port_check với target email."
+      }
+    },
+    {
+      "id": "G04_parallel_device_and_network",
+      "phase": "B",
+      "suite": "group",
+      "query": "Kiểm tra tổng thể laptop LT-204 đồng thời ping thử kết nối đến gateway nội bộ.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "all"
+            }
+          },
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "gateway",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "parallel_inspect_and_diagnose",
+        "difficulty": "hard",
+        "what_it_tests": "Gọi đồng thời inspect_device và diagnose_network trong cùng một lượt."
+      }
+    },
+    {
+      "id": "G05_out_of_scope_movie",
+      "phase": "B",
+      "suite": "group",
+      "query": "Gợi ý cho mình top 5 phim khoa học viễn tưởng hay nhất năm nay.",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "out_of_scope_entertainment",
+        "difficulty": "easy",
+        "what_it_tests": "Từ chối yêu cầu ngoài phạm vi IT Helpdesk mà không gọi bất kỳ công cụ nào."
+      }
+    },
+    {
+      "id": "G06_multiturn_diagnose_target_switch",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Ping thử dịch vụ VPN xem có phản hồi không."
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang ping dịch vụ email nhé."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ kiểm tra ping tới email thôi."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_target_switch",
+        "difficulty": "hard",
+        "what_it_tests": "Cập nhật target mới (email) và giữ nguyên test_type (ping) trong hội thoại đa lượt."
+      }
+    },
+    {
+      "id": "G07_multiturn_diagnose_test_type_change",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Kiểm tra kết nối tới dịch vụ SSO."
+        },
+        {
+          "role": "user",
+          "content": "Không cần ping nữa, hãy kiểm tra cổng mở (port_check) của SSO."
+        },
+        {
+          "role": "user",
+          "content": "Thực hiện port_check cho SSO giúp mình."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "port_check"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_test_type_change",
+        "difficulty": "hard",
+        "what_it_tests": "Chuyển đổi test_type từ mặc định sang port_check trong ngữ cảnh đa lượt."
+      }
+    },
+    {
+      "id": "G08_multiturn_diagnose_then_ticket_confirmed",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Lập ticket hỗ trợ mạng cho máy LT-204 mức priority medium."
+        },
+        {
+          "role": "user",
+          "content": "Nâng mức ưu tiên lên high."
+        },
+        {
+          "role": "user",
+          "content": "Tôi đồng ý và xác nhận tạo ticket này ngay."
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "create_ticket",
+            "args": {
+              "asset_id": "LT-204",
+              "priority": "high",
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_confirmed_ticket",
+        "difficulty": "hard",
+        "what_it_tests": "Tạo ticket thành công khi người dùng xác nhận sau khi sửa độ ưu tiên."
+      }
+    },
+    {
+      "id": "G09_multiturn_clarify_then_device",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo mật trên laptop của mình."
+        },
+        {
+          "role": "user",
+          "content": "Mã máy của tôi là LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Tiến hành kiểm tra security trên máy đó nhé."
+        }
+      ],
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_fill_device_info",
+        "difficulty": "hard",
+        "what_it_tests": "Bổ sung asset_id sau lượt clarify và thực hiện kiểm tra security."
+      }
+    },
+    {
+      "id": "G10_multiturn_cancel_ticket_action",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tạo ticket kiểm tra màn hình máy LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Thôi mình tự chỉnh được rồi, hủy không tạo ticket nữa nhé."
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "no_tool": true,
+        "behavior": "cancel"
+      },
+      "metadata": {
+        "skill": "multiturn_cancel_action",
+        "difficulty": "medium",
+        "what_it_tests": "Tôn trọng yêu cầu hủy hành động của người dùng, không gọi tool create_ticket."
+      }
+    }
+  ]
 }

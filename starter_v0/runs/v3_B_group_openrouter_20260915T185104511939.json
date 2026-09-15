@@ -1,0 +1,732 @@
+{
+  "run_id": "v3_B_group_openrouter_20260915T185104511939",
+  "version": "v3",
+  "artifact_version": "v3+p9a56ac36893b+t52b9e7efecc6",
+  "prompt_hash": "9a56ac36893b2e49e6c38ad60601440ef2654f2ee97ad448425731ce1b6026a7",
+  "tools_hash": "52b9e7efecc60b01ece3dc19b5588ff06dab972aa39541fad0256be2bb775588",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v3_helpdesk_group",
+  "dataset_role": "group",
+  "description": "Team NhomGG custom test suite: 5 single-turn queries and 5 multi-turn conversations testing helpdesk capabilities and the bonus diagnose_network tool.",
+  "generated_at": "2026-09-15T18:51:04",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 9,
+    "case_accuracy": 0.9,
+    "tool_routing_accuracy": 0.9,
+    "argument_accuracy": 0.9,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_boundary": 1
+    },
+    "observed_mismatch_counts": {
+      "unexpected_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_diagnose_ping_vpn",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "bonus_network_ping",
+        "difficulty": "easy",
+        "what_it_tests": "Kiểm tra khả năng định tuyến đúng vào tool mở rộng diagnose_network với test_type ping."
+      },
+      "input": "Kiểm tra ping và độ trễ kết nối đến hệ thống VPN giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "vpn",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "vpn",
+              "test_type": "ping"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "vpn",
+            "test_type": "ping"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "vpn",
+            "test_type": "ping",
+            "target_ip": "10.10.1.1",
+            "latency_ms": 25,
+            "packet_loss_pct": 0,
+            "status": "healthy",
+            "summary": "Ping to vpn (10.10.1.1) successful: 0% loss, latency 25ms",
+            "tested_at": "2026-09-15T18:50:53"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_diagnose_dns_lookup",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "bonus_network_dns",
+        "difficulty": "medium",
+        "what_it_tests": "Trích xuất đúng target và test_type=dns_lookup cho tool chẩn đoán mạng."
+      },
+      "input": "Thực hiện DNS lookup phân giải địa chỉ cho máy chủ SSO.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "dns_lookup"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "dns_lookup"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "sso",
+            "test_type": "dns_lookup"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "sso",
+            "test_type": "dns_lookup",
+            "resolved_ip": "10.10.3.10",
+            "status": "resolved",
+            "dns_server": "10.10.0.2",
+            "tested_at": "2026-09-15T18:50:54"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_diagnose_email_port",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "bonus_network_port",
+        "difficulty": "medium",
+        "what_it_tests": "Định tuyến sang test_type=port_check với target email."
+      },
+      "input": "Kiểm tra cổng kết nối port của máy chủ email nội bộ.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "port_check"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "port_check"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "email",
+            "test_type": "port_check"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "email",
+            "test_type": "port_check",
+            "target_ip": "10.10.2.25",
+            "port": 587,
+            "port_status": "open",
+            "tested_at": "2026-09-15T18:50:55"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_parallel_device_and_network",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "parallel_inspect_and_diagnose",
+        "difficulty": "hard",
+        "what_it_tests": "Gọi đồng thời inspect_device và diagnose_network trong cùng một lượt."
+      },
+      "input": "Kiểm tra tổng thể laptop LT-204 đồng thời ping thử kết nối đến gateway nội bộ.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "all"
+            }
+          },
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "gateway",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "all"
+            }
+          },
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "gateway",
+              "test_type": "ping"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "inspect_device",
+          "args": {
+            "asset_id": "LT-204",
+            "check": "all"
+          },
+          "result": {
+            "tool": "inspect_device",
+            "asset_id": "LT-204",
+            "check": "all",
+            "device": {
+              "asset_id": "LT-204",
+              "manufacturer": "Lenovo",
+              "type": "laptop",
+              "model": "ThinkPad T14 Gen 4",
+              "os": "Windows 11 23H2",
+              "assigned_to": "EMP-1001",
+              "location": "Bangkok floor 3",
+              "purchase_date": "2024-02-12",
+              "warranty_until": "2027-02-11"
+            },
+            "diagnostics": {
+              "network": "online; latency 24 ms; DNS healthy",
+              "vpn": "client 5.2.1; last connection failed with AUTH_TIMEOUT",
+              "security": "disk encrypted; endpoint agent healthy; patches current",
+              "hardware": "battery health 86%; disk SMART healthy",
+              "software": "Outlook and VPN client installed; pending browser update"
+            },
+            "snapshot_at": "2026-09-14T09:00:00+07:00"
+          }
+        },
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "gateway",
+            "test_type": "ping"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "gateway",
+            "test_type": "ping",
+            "target_ip": "10.10.0.1",
+            "latency_ms": 2,
+            "packet_loss_pct": 0,
+            "status": "healthy",
+            "summary": "Ping to gateway (10.10.0.1) successful: 0% loss, latency 2ms",
+            "tested_at": "2026-09-15T18:50:56"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_movie",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_entertainment",
+        "difficulty": "easy",
+        "what_it_tests": "Từ chối yêu cầu ngoài phạm vi IT Helpdesk mà không gọi bất kỳ công cụ nào."
+      },
+      "input": "Gợi ý cho mình top 5 phim khoa học viễn tưởng hay nhất năm nay.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ có thể hỗ trợ bạn với các vấn đề liên quan đến IT và dịch vụ hỗ trợ kỹ thuật. Nếu bạn cần giúp đỡ về ticket, tài sản, hoặc chính sách công ty, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_multiturn_diagnose_target_switch",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_target_switch",
+        "difficulty": "hard",
+        "what_it_tests": "Cập nhật target mới (email) và giữ nguyên test_type (ping) trong hội thoại đa lượt."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Ping thử dịch vụ VPN xem có phản hồi không."
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang ping dịch vụ email nhé."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ kiểm tra ping tới email thôi."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "ping"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "email",
+              "test_type": "ping"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "email",
+            "test_type": "ping"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "email",
+            "test_type": "ping",
+            "target_ip": "10.10.2.25",
+            "latency_ms": 15,
+            "packet_loss_pct": 0,
+            "status": "healthy",
+            "summary": "Ping to email (10.10.2.25) successful: 0% loss, latency 15ms",
+            "tested_at": "2026-09-15T18:50:59"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_multiturn_diagnose_test_type_change",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_test_type_change",
+        "difficulty": "hard",
+        "what_it_tests": "Chuyển đổi test_type từ mặc định sang port_check trong ngữ cảnh đa lượt."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra kết nối tới dịch vụ SSO."
+        },
+        {
+          "role": "user",
+          "content": "Không cần ping nữa, hãy kiểm tra cổng mở (port_check) của SSO."
+        },
+        {
+          "role": "user",
+          "content": "Thực hiện port_check cho SSO giúp mình."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "port_check"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "diagnose_network",
+            "args": {
+              "target": "sso",
+              "test_type": "port_check"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "diagnose_network",
+          "args": {
+            "target": "sso",
+            "test_type": "port_check"
+          },
+          "result": {
+            "tool": "diagnose_network",
+            "target": "sso",
+            "test_type": "port_check",
+            "target_ip": "10.10.3.10",
+            "port": 443,
+            "port_status": "open",
+            "tested_at": "2026-09-15T18:51:00"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_multiturn_diagnose_then_ticket_confirmed",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirmed_ticket",
+        "difficulty": "hard",
+        "what_it_tests": "Tạo ticket thành công khi người dùng xác nhận sau khi sửa độ ưu tiên."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Lập ticket hỗ trợ mạng cho máy LT-204 mức priority medium."
+        },
+        {
+          "role": "user",
+          "content": "Nâng mức ưu tiên lên high."
+        },
+        {
+          "role": "user",
+          "content": "Tôi đồng ý và xác nhận tạo ticket này ngay."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "create_ticket",
+            "args": {
+              "asset_id": "LT-204",
+              "priority": "high",
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "create_ticket",
+            "args": {
+              "summary": "Hỗ trợ mạng cho máy LT-204",
+              "priority": "high",
+              "asset_id": "LT-204",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "create_ticket",
+          "args": {
+            "summary": "Hỗ trợ mạng cho máy LT-204",
+            "priority": "high",
+            "asset_id": "LT-204",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "create_ticket",
+            "status": "created",
+            "ticket_id": "LAB-9EAE43E8",
+            "path": "D:\\AIVin\\Day04_Lab1\\K4-DAY04-NhomGG\\starter_v0\\tickets\\LAB-9EAE43E8.json"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_multiturn_clarify_then_device",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_fill_device_info",
+        "difficulty": "hard",
+        "what_it_tests": "Bổ sung asset_id sau lượt clarify và thực hiện kiểm tra security."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo mật trên laptop của mình."
+        },
+        {
+          "role": "user",
+          "content": "Mã máy của tôi là LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Tiến hành kiểm tra security trên máy đó nhé."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "security"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "inspect_device",
+          "args": {
+            "asset_id": "LT-204",
+            "check": "security"
+          },
+          "result": {
+            "tool": "inspect_device",
+            "asset_id": "LT-204",
+            "check": "security",
+            "device": {
+              "asset_id": "LT-204",
+              "manufacturer": "Lenovo",
+              "type": "laptop",
+              "model": "ThinkPad T14 Gen 4",
+              "os": "Windows 11 23H2",
+              "assigned_to": "EMP-1001",
+              "location": "Bangkok floor 3",
+              "purchase_date": "2024-02-12",
+              "warranty_until": "2027-02-11"
+            },
+            "diagnostics": {
+              "security": "disk encrypted; endpoint agent healthy; patches current"
+            },
+            "snapshot_at": "2026-09-14T09:00:00+07:00"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_multiturn_cancel_ticket_action",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel_action",
+        "difficulty": "medium",
+        "what_it_tests": "Tôn trọng yêu cầu hủy hành động của người dùng, không gọi tool create_ticket."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tạo ticket kiểm tra màn hình máy LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Thôi mình tự chỉnh được rồi, hủy không tạo ticket nữa nhé."
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "cancel"
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "unexpected_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "expected no tool call"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có chắc chắn muốn hủy việc tạo ticket kiểm tra màn hình máy LT-204 không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    }
+  ]
+}
