@@ -7,7 +7,7 @@
 - Tên nhóm: NhomGG 
 - Người đại diện / MSSV: Lục Tiến Đạt / 2A202602969
 - Tên repo: `K4-DAY04-NhomGG`
-- URL repo, nhánh nộp, commit chốt: https://github.com/tad0910/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling , nhánh main, commit `73431bb`
+- URL repo, nhánh nộp, commit chốt: https://github.com/tad0910/K4-L3-DAY04-LucTienDat-2A202602969-PromptEngineeringToolCalling , nhánh main, commit `7616670`
 - Deadline áp dụng: 23:59 ngày học (Asia/Ho_Chi_Minh)
 
 ## Thành viên và Phân chia Vai trò (Theo D04 Guide)
@@ -15,14 +15,14 @@
 | Họ và tên | MSSV | GitHub | Vai trò (D04 Guide) | Công việc chính | Sản phẩm bàn giao / File |
 |---|---|---|---|---|---|
 | **Trần Tuấn Hoàng** | 2A202602832 |  | **Vai A — Hướng dẫn và công cụ** | Đọc lỗi; sửa `system_prompt.md`, chuẩn hóa mô tả `tools.yaml`, xử lý missing info & confirmation boundaries | `starter_v0/artifacts/system_prompt.md`, `tools.yaml` |
-| **Nguyễn Văn Đại** | 2A202602477 |  | **Vai C — Giao diện và hội thoại** | Xây dựng Web Chat UI; hiển thị tool calls, inputs, results/errors, quản lý phiên chat & lưu transcript | `starter_v0/ui_app.py`, `starter_v0/transcripts/` |
+| **Nguyễn Văn Đại** | 2A202602477 |  | **Vai C — Giao diện và hội thoại** | Xây dựng Web Chat UI; hiển thị tool calls, inputs, results/errors, quản lý phiên chat & lưu transcript | `starter_v0/app.py`, `starter_v0/transcripts/` |
 | **Lục Tiến Đạt** | 2A202602969 | tad0910 | **Vai B + D — Dữ liệu & kiểm tra + Tích hợp & báo cáo** | Soạn 10 test case nhóm; phát triển bonus tool `diagnose_network`; chạy benchmark v0–v3, group, adversarial; tích hợp repo & viết report | `starter_v0/tools/diagnose_network/`, `data/eval_group.json`, `REPORT.md`, `version_log.csv` |
 
 ---
 
 ## Nhận xét chung
 
-- **Kết quả và bằng chứng:** Đạt độ chính xác tổng thể tăng từ 70% (v0) lên 83.33% (v3) trên bộ 30 test case base, 90% độ chính xác chọn tool, 90% đa lượt (9/10), và 90% trên bộ 10 test case của nhóm. Toàn bộ file run evidence JSON được lưu tại `starter_v0/runs/`.
+- **Kết quả và bằng chứng:** Đạt độ chính xác tổng thể tăng từ 70% (v0) lên **100.0% (30/30 PASS)** ở v3 trên bộ 30 test case base (`case_accuracy: 1.0`, `tool_routing_accuracy: 1.0`, `argument_accuracy: 1.0`, `multiturn_accuracy: 1.0`), và đạt 90% trên bộ 10 test case của nhóm (`eval_group.json`). Toàn bộ file run evidence JSON được lưu tại `starter_v0/runs/`.
 - **Thay đổi hiệu quả nhất:** Thêm quy tắc xử lý thiếu thông tin (`missing_info` ➔ `clarify`) và ranh giới an toàn tạo ticket (`wrong_boundary` ➔ bắt buộc xác nhận `confirmed=True`), kết hợp chuẩn hóa schema `tools.yaml`.
 - **Giới hạn còn lại:** Đối với các câu prompt cố tình bypass an toàn kiểu phức tạp (adversarial injection), hệ thống cần thêm một lớp Guardrail kiểm duyệt đầu vào (Input filtering).
 - **Cách phân công và tích hợp:** Phân chia rõ ràng theo 4 vai trò A, B, C, D (Nhóm 3 người ghép B+D cho Đạt, A cho Hoàng, C cho Đại). Phối hợp qua Git repo chung và khớp nối bằng chứng tại từng checkpoint.
